@@ -1,4 +1,4 @@
-package com.valdir.helpdesk.domain.repository;
+package com.valdir.helpdesk.repository;
 
 import com.valdir.helpdesk.domain.Tecnico;
 import org.springframework.data.jpa.repository.JpaRepository;
