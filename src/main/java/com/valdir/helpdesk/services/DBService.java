@@ -26,7 +26,6 @@ public class DBService {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
-    @Autowired
     public void instanciaDB() {
         Tecnico tec1 = new Tecnico(null, "Valdir Cesar", "76045777093", "valdir@gmail.com", "123");
         tec1.addPerfil(Perfil.ADMIN);
