@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TecnicoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    protected Long id;
+    protected Integer id;
 
     @NotNull(message = "O campo NOME é Obrigatório")
     protected String nome;
@@ -47,11 +47,11 @@ public class TecnicoDTO implements Serializable {
         addPerfis(Perfil.CLIENTE);
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

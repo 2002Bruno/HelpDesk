@@ -3,6 +3,7 @@ package com.valdir.helpdesk.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.valdir.helpdesk.domain.enums.Perfil;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,10 +17,11 @@ public abstract class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    protected Integer id;
 
     protected String nome;
 
+    @CPF
     @Column(unique = true)
     protected String cpf;
 
@@ -34,11 +36,11 @@ public abstract class Pessoa implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -95,7 +97,7 @@ public abstract class Pessoa implements Serializable {
         addPerfil(Perfil.CLIENTE);
     }
 
-    public Pessoa(Long id, String nome, String cpf, String email, String senha) {
+    public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;

@@ -8,7 +8,6 @@ import com.valdir.helpdesk.repository.TecnicoRepository;
 import com.valdir.helpdesk.resources.exceptions.DataIntegrityViolationException;
 import com.valdir.helpdesk.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +39,15 @@ public class TecnicoService {
         validaPorCpfEEmail(tecnicoDTO);
         Tecnico newObj = new Tecnico(tecnicoDTO);
         return tecnicoRepository.save(newObj);
+    }
+
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico oldObj = findById(id);
+        validaPorCpfEEmail(tecnicoDTO);
+        oldObj = new Tecnico(tecnicoDTO);
+
+        return tecnicoRepository.save(oldObj);
     }
 
     private void validaPorCpfEEmail(TecnicoDTO tecnicoDTO) {

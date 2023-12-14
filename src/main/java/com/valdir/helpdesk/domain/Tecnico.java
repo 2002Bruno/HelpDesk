@@ -23,7 +23,7 @@ public class Tecnico extends Pessoa {
         addPerfil(Perfil.CLIENTE);
     }
 
-    public Tecnico(Long id, String nome, String cpf, String email, String senha) {
+    public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
         addPerfil(Perfil.CLIENTE);
     }
