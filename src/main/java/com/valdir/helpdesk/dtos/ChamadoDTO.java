@@ -5,6 +5,7 @@ import com.valdir.helpdesk.domain.Chamado;
 import com.valdir.helpdesk.domain.Cliente;
 import com.valdir.helpdesk.domain.Tecnico;
 import com.valdir.helpdesk.domain.enums.Status;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,19 +21,25 @@ public class ChamadoDTO implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
 
+    @NotNull(message = "O campo PRIORIDADE é de preenchimento obrigatório")
     private Integer prioridade;
 
-    private Status status;
+    @NotNull(message = "O campo STATUS é de preenchimento obrigatório")
+    private Integer status;
 
+    @NotNull(message = "O campo TÍTULO é de preenchimento obrigatório")
     private String titulo;
 
+    @NotNull(message = "O campo OBSERVAÇÕES é de preenchimento obrigatório")
     private String observacoes;
 
-    private Tecnico tecnico;
+    @NotNull(message = "O campo TÉCNICO é de preenchimento obrigatório")
+    private Integer tecnico;
 
     private String nomeTecnico;
 
-    private Cliente cliente;
+    @NotNull(message = "O campo CLIENTE é de preenchimento obrigatório")
+    private Integer cliente;
 
     private String nomeCliente;
 
@@ -46,12 +53,12 @@ public class ChamadoDTO implements Serializable {
         this.dataAbertura = obj.getDataAbertura();
         this.dataFechamento = obj.getDataFechamento();
         this.prioridade = obj.getPrioridade().getCodigo();
-        this.status = obj.getStatus();
+        this.status = obj.getStatus().getCodigo();
         this.titulo = obj.getTitulo();
         this.observacoes = obj.getObservacoes();
-        this.tecnico = obj.getTecnico();
+        this.tecnico = obj.getTecnico().getId();
         this.nomeTecnico = obj.getObservacoes();
-        this.cliente = obj.getCliente();
+        this.cliente = obj.getCliente().getId();
         this.nomeCliente = obj.getObservacoes();
     }
 
@@ -87,11 +94,11 @@ public class ChamadoDTO implements Serializable {
         this.prioridade = prioridade;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -111,11 +118,11 @@ public class ChamadoDTO implements Serializable {
         this.observacoes = observacoes;
     }
 
-    public Tecnico getTecnico() {
+    public Integer getTecnico() {
         return tecnico;
     }
 
-    public void setTecnico(Tecnico tecnico) {
+    public void setTecnico(Integer tecnico) {
         this.tecnico = tecnico;
     }
 
@@ -127,11 +134,11 @@ public class ChamadoDTO implements Serializable {
         this.nomeTecnico = nomeTecnico;
     }
 
-    public Cliente getCliente() {
+    public Integer getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Integer cliente) {
         this.cliente = cliente;
     }
 
