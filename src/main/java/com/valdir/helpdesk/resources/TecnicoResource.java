@@ -1,4 +1,4 @@
-package com.valdir.helpdesk.resource;
+package com.valdir.helpdesk.resources;
 
 import com.valdir.helpdesk.domain.Tecnico;
 import com.valdir.helpdesk.dtos.TecnicoDTO;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/tecnicos")
