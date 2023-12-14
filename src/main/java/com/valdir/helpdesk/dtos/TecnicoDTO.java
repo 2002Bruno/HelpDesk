@@ -1,9 +1,8 @@
 package com.valdir.helpdesk.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.valdir.helpdesk.domain.Tecnico;
 import com.valdir.helpdesk.domain.enums.Perfil;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,12 +15,16 @@ public class TecnicoDTO implements Serializable {
 
     protected Long id;
 
+    @NotNull(message = "O campo NOME é Obrigatório")
     protected String nome;
 
+    @NotNull(message = "O campo CPF é Obrigatório")
     protected String cpf;
 
+    @NotNull(message = "O campo EMAIL é Obrigatório")
     protected String email;
 
+    @NotNull(message = "O campo SENHA é Obrigatório")
     protected String senha;
 
     protected Set<Integer> perfis = new HashSet<>();
