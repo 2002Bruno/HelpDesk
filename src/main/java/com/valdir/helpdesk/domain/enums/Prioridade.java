@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum Prioridade {
 
     BAIXA(0, "BAIXA"),
-    MEDIA(0, "MEDIA"),
-    ALTA(0, "ALTA");
+    MEDIA(1, "MEDIA"),
+    ALTA(2, "ALTA");
 
     private Integer codigo;
 

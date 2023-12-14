@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum Status {
 
     ABERTO(0, "ABERTO"),
-    ANDAMENTO(0, "ANDAMENTO"),
-    RENCERRADO(0, "RENCERRADO");
+    ANDAMENTO(1, "ANDAMENTO"),
+    RENCERRADO(2, "RENCERRADO");
 
     private Integer codigo;
 

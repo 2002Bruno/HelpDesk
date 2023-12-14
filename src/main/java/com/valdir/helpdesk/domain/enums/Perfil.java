@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum Perfil {
 
     ADMIN(0, "ROLE_ADMIN"),
-    CLIENTE(0, "ROLE_CLIENTE"),
-    TECNICO(0, "ROLE_TECNICO");
+    CLIENTE(1, "ROLE_CLIENTE"),
+    TECNICO(2, "ROLE_TECNICO");
 
     private Integer codigo;
 
