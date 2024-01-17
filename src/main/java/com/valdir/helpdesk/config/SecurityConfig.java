@@ -1,6 +1,7 @@
 package com.valdir.helpdesk.config;
 
 import com.valdir.helpdesk.security.JWTAuthenticationFilter;
+import com.valdir.helpdesk.security.JWTAuthorizationFilter;
 import com.valdir.helpdesk.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
@@ -47,6 +50,7 @@ public class SecurityConfig {
         http.cors().and().csrf().disable();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), jwtUtil, userDetailsService));
 
         http.authorizeHttpRequests().requestMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
 
