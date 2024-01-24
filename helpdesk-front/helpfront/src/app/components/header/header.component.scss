@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+}
+
+h1 {
+  margin-top: 1rem;
+  border: 3px solid rgba(93,11,131,1);
+  padding: 1rem 10%;
+  border-radius: 2rem;
+  background: linear-gradient(100deg, rgba(93,11,131,1) 0%, rgba(73,8,126,1) 41%, rgba(29,56,134,1) 100%);;
+}
