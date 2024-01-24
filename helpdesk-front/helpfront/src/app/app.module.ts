@@ -23,6 +23,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NavComponentComponent } from './components/nav-component/nav-component.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HeaderComponent } from './components/header/header.component';
     AppComponent,
     NavComponentComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    TecnicoListComponent
   ],
   imports: [
     BrowserModule,
