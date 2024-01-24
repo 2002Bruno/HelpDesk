@@ -1,0 +1,35 @@
+.container {
+  height: 100%;
+  background: linear-gradient(100deg, rgba(93,11,131,1) 0%, rgba(73,8,126,1) 41%, rgba(29,56,134,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 30rem;
+  margin: auto;
+  background: linear-gradient(81deg, rgba(44,29,51,1) 2%, rgba(30,22,37,1) 100%, rgba(4,13,42,1) 100%);
+  padding: 4rem 1rem;
+  border-radius: 1rem;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+img {
+  height: 15rem;
+  width: 100%;
+  margin: 1.5rem auto 1.5rem auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  margin-top: 1.5rem;
+}
