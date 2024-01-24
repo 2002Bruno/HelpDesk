@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { TecnicoModel } from "../../../models/Tecnico";
+import { TecnicoModel } from "../../../models/tecnico";
 
 @Component({
   selector: 'app-tecnico-list',

@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ToastrModule, ToastrService } from "ngx-toastr";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -10,6 +12,14 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        ToastrModule.forRoot()
+      ],
+      providers: [
+        ToastrService,
+      ],
       schemas: [
         [CUSTOM_ELEMENTS_SCHEMA]
       ]
