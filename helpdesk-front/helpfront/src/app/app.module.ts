@@ -21,12 +21,14 @@ import { MatCardModule } from "@angular/material/card";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NavComponentComponent } from './components/nav-component/nav-component.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponentComponent
+    NavComponentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
