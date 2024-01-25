@@ -9,7 +9,7 @@
       <input
         [formControl]="email"
         required
-        ([ngModel])="creds.email"
+        [(ngModel)]="this.creds.email"
         name="email"
         matInput
         placeholder="Ex. fulano123@gmail.com">
@@ -20,13 +20,13 @@
       <input
         [formControl]="senha"
         required
-        ([ngModel])="creds.senha"
+        [(ngModel)]="this.creds.senha"
         name="senha"
         type="password"
         matInput
         placeholder="Ex. 12345">
     </mat-form-field>
 
-    <button (click)="logar()" [disabled]="!validarCampos()" class="full-width mat-elevation-z8" mat-stroked-button color="accent">Primary</button>
+    <button type="submit" (click)="logar()" [disabled]="!validarCampos()" class="full-width mat-elevation-z8" mat-stroked-button color="accent">Primary</button>
   </form>
 </div>
