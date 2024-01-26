@@ -9,7 +9,8 @@ import { TecnicoModel } from "../models/tecnico";
 })
 export class TecnicoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   findAll(): Observable<TecnicoModel[]> {
     return this.http.get<TecnicoModel[]>(`${API_CONFIG.baseUrl}/tecnicos`);
@@ -17,5 +18,13 @@ export class TecnicoService {
 
   create(tecnico: TecnicoModel): Observable<TecnicoModel> {
     return this.http.post<TecnicoModel>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico);
+  }
+
+  findById(id: any): Observable<TecnicoModel> {
+    return this.http.get<TecnicoModel>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
+  }
+
+  update(tecnico: TecnicoModel): Observable<TecnicoModel> {
+    return this.http.put<TecnicoModel>(`${API_CONFIG.baseUrl}/tecnicos/${tecnico.id}`, tecnico);
   }
 }
