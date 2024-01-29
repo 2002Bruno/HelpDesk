@@ -1,0 +1,39 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.width-full {
+  width: 100%;
+}
+
+.width-full-button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.delete {
+  color: white;
+  transition: 0.3s;
+}
+
+.delete:hover {
+  color: red;
+}
+
+.edit {
+  color: white;
+  transition: 0.3s;
+}
+
+.edit:hover {
+  color: rgb(141, 36, 196);;
+}
