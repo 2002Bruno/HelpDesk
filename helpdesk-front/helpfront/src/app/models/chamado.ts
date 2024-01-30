@@ -6,9 +6,9 @@ export interface ChamadoModel {
   prioridade: string;
   status: string;
   titulo: string;
-  descricao: string;
-  tecnico: any;
-  cliente: any;
+  observacoes: string;
+  tecnico: number;
+  cliente: number;
   nomeCliente: string;
   nomeTecnico: string;
 }
