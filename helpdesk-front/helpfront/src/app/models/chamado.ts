@@ -1,4 +1,4 @@
-export interface Chamado {
+export interface ChamadoModel {
 
   id?: any;
   dataAbertura?: string;
