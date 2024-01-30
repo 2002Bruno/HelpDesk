@@ -4,7 +4,7 @@
     <h1>Help Desk - Tecnology</h1>
     <img src="assets/img/login-image.svg" alt="Help Desk - Tecnology">
 
-    <mat-form-field class="full-width" appearance="fill">
+    <mat-form-field class="full-width" appearance="outline">
       <mat-label>E-mail</mat-label>
       <input
         [formControl]="email"
@@ -13,9 +13,10 @@
         name="email"
         matInput
         placeholder="Ex. fulano123@gmail.com">
+      <mat-icon style="color: white" matSuffix>email</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
+    <mat-form-field class="full-width" appearance="outline">
       <mat-label>Senha</mat-label>
       <input
         [formControl]="senha"
@@ -25,6 +26,7 @@
         type="password"
         matInput
         placeholder="Ex. 12345">
+      <mat-icon style="color: white" matSuffix>password</mat-icon>
     </mat-form-field>
 
     <button type="submit" (click)="logar()" [disabled]="!validarCampos()" class="full-width mat-elevation-z8" mat-stroked-button color="accent">Primary</button>
