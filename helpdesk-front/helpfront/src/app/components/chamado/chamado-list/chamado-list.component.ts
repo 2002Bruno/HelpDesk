@@ -46,7 +46,7 @@ export class ChamadoListComponent implements OnInit {
   ordenarPorStatus(status: any): void {
 
     this.chamados.forEach(element => {
-      if (element.status != status) {
+      if (element.status == status) {
        this.chamadoFiltered = this.chamados.filter(chamado => chamado.status === status);;
       }
       this.dataSource = new MatTableDataSource<ChamadoModel>(this.chamadoFiltered);
