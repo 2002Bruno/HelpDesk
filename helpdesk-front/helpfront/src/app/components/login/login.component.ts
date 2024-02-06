@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Credenciais } from "../../models/credenciais";
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
@@ -13,13 +12,7 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  creds: Credenciais = {
-    email: '',
-    senha: ''
-  }
-
-  email = new FormControl(null, Validators.email);
-  senha = new FormControl(null, Validators.minLength(3));
+  loginForm: FormGroup;
 
   constructor(
     private toast: ToastrService,
@@ -27,10 +20,18 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.inicializarForm();
+  }
+
+  inicializarForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      senha: new FormControl(null, [Validators.minLength(3), Validators.required]),
+    });
   }
 
   logar() {
-    this.service.authenticate(this.creds).subscribe(response => {
+    this.service.authenticate(this.loginForm.value).subscribe(response => {
       this.service.successfulLogin(response.headers.get('Authorization').substring(7));
       this.toast.success('Login realizado com sucesso!', 'Success');
       this.router.navigate(['']);
@@ -40,6 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   validarCampos(): boolean {
-    return this.email.valid && this.senha.valid;
+    return this.loginForm.valid;
   }
 }
