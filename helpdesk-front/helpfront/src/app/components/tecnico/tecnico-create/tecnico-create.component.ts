@@ -30,7 +30,6 @@ export class TecnicoCreateComponent implements OnInit {
       cpf: new FormControl(null, [Validators.required, Validators.maxLength(11)]),
       email: new FormControl(null, [Validators.email, Validators.required]),
       senha: new FormControl(null, [Validators.minLength(3), Validators.required]),
-      perfis: new FormControl(null, [Validators.minLength(3), Validators.required]),
     });
   }
 
@@ -48,16 +47,6 @@ export class TecnicoCreateComponent implements OnInit {
       }
     });
   }
-
-  // addPerfil(perfil: any): void {
-  //   this.tecnico.perfis.push(perfil);
-  //
-  //   if (this.tecnico.perfis.includes(perfil)) {
-  //     this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-  //   } else {
-  //     this.tecnico.perfis.push(perfil);
-  //   }
-  // }
 
   validarCampos() {
     return this.tecnicoForm.valid;
