@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { ClienteService } from "../../../services/cliente.service";
-import { ClienteModel } from "../../../models/cliente";
 
 @Component({
   selector: 'app-cliente-update',
@@ -12,44 +11,59 @@ import { ClienteModel } from "../../../models/cliente";
 })
 export class ClienteUpdateComponent implements OnInit {
 
-  cliente: ClienteModel = {
-    id: '',
-    nome: '',
-    cpf: '',
-    email: '',
-    senha: '',
-    perfis: [],
-    dataCriacao: '',
-  }
-
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, [Validators.required, Validators.maxLength(11)]);
-  email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  clienteForm: FormGroup;
+  clienteId: any;
 
   constructor(
     private router: Router,
     private clienteService: ClienteService,
     private toast: ToastrService,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
-    this.cliente.id = this.route.snapshot.paramMap.get('id');
+    this.clienteId = this.route.snapshot.paramMap.get('id');
+  this.inicializarForm();
 
     this.findById();
   }
 
+  inicializarForm() {
+    this.clienteForm = new FormGroup({
+
+      id: new FormControl(this.clienteId, Validators.required),
+      nome: new FormControl(null, [Validators.minLength(3), Validators.required]),
+      cpf: new FormControl(null, [Validators.required, Validators.maxLength(11)]),
+      email: new FormControl(null),
+      senha: new FormControl(null, [Validators.minLength(3), Validators.required]),
+    });
+  }
+
+  preencherForm(cliente) {
+    this.clienteForm = this.formBuilder.group({
+      id: [cliente.id],
+      nome: [cliente.nome],
+      cpf: [cliente.cpf],
+      email: [cliente.email],
+      senha: [cliente.senha],
+    });
+
+    this.clienteForm.controls['email'].disable();
+  }
+
   findById(): void {
-    this.clienteService.findById(this.cliente.id).subscribe(response => {
-      response.perfis = [];
-      this.cliente = response;
+    this.clienteService.findById(this.clienteId).subscribe(response => {
+
+      this.preencherForm(response);
     });
   }
 
   onSubmit(): void {
-    this.clienteService.update(this.cliente).subscribe(response => {
+    this.clienteForm.value.email = this.clienteForm['controls']['email'].value;
+
+    this.clienteService.update(this.clienteForm.value).subscribe(response => {
       this.toast.success('Cliente atualizado com sucesso', 'Edição');
       this.router.navigate(['/clientes']);
     }, error => {
@@ -63,18 +77,8 @@ export class ClienteUpdateComponent implements OnInit {
     });
   }
 
-  addPerfil(perfil: any): void {
-    this.cliente.perfis.push(perfil);
-
-    if (this.cliente.perfis.includes(perfil)) {
-      this.cliente.perfis.splice(this.cliente.perfis.indexOf(perfil), 1);
-    } else {
-      this.cliente.perfis.push(perfil);
-    }
-  }
-
   validarCampos() {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.clienteForm.valid;
   }
 
   voltar() {
