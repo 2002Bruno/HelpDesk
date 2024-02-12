@@ -6,6 +6,6 @@
 <p>Angular 13.2.0, Java 17, Spring Boot 3.0.0, Spring Security e JWT Token até o momento...</p>
 
 <h1>Tela de login</h1>
-<div allign="center">
-  <img src="helpdesk-front/helpfront/src/assets/img/imagens-do-projeto/tela-login.png">
-</div>
+<p>A tela de login é composta pelo card, imagem e os campos de entrada que são o (email e senha) contendo a validação dos campos por meio de formulário reativo., O botão de login só é liberado após o preenchimento dos campos.</p>
+
+![tela-login](https://github.com/2002Bruno/HelpDesk/assets/81988790/3f1f5939-8689-400c-9aac-3251fe9cb8a2)
