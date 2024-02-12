@@ -2,6 +2,7 @@ package com.valdir.helpdesk.services;
 
 import com.valdir.helpdesk.domain.Pessoa;
 import com.valdir.helpdesk.domain.Tecnico;
+import com.valdir.helpdesk.domain.enums.Perfil;
 import com.valdir.helpdesk.dtos.TecnicoDTO;
 import com.valdir.helpdesk.repository.PessoaRepository;
 import com.valdir.helpdesk.repository.TecnicoRepository;
@@ -43,6 +44,7 @@ public class TecnicoService {
         tecnicoDTO.setSenha(encoder.encode(tecnicoDTO.getSenha()));
         validaPorCpfEEmail(tecnicoDTO);
         Tecnico newObj = new Tecnico(tecnicoDTO);
+        newObj.addPerfil(Perfil.ADMIN);
         return tecnicoRepository.save(newObj);
     }
 

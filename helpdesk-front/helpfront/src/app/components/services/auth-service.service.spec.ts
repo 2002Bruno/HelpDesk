@@ -4,7 +4,6 @@ import { AuthService } from './auth.service';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { API_CONFIG } from "../../config/api-config";
-import { Credenciais } from "../../models/credenciais";
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 
 describe('AuthServiceService', () => {

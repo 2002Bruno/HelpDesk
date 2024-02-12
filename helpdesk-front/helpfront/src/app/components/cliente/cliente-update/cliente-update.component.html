@@ -1,20 +1,13 @@
 <div class="container mat-elevation-z8">
-  <form class="form">
-    <h1 class="full-width">Cadastrar cliente</h1>
-    <img class="full-width" src="assets/img/tecnico-create.svg" alt="Help Desk - technology">
-
-    <section class="section">
-      <mat-checkbox (click)="addPerfil(0)" class="example-margin" color="primary">Admin</mat-checkbox>
-      <mat-checkbox (click)="addPerfil(1)" class="example-margin" [checked]="true" disabled color="primary">Cliente</mat-checkbox>
-      <mat-checkbox (click)="addPerfil(2)" class="example-margin" color="primary">Técnico</mat-checkbox>
-    </section>
+  <form class="form" [formGroup]="clienteForm">
+    <h1 class="full-width">Atualizar cliente</h1>
+    <img class="full-width" src="assets/img/tecnico-create.svg" alt="Help Desk - Technology">
 
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>Nome</mat-label>
       <input
-        [(ngModel)]="cliente.nome"
+        formControlName="nome"
         name="nome"
-        [formControl]="nome"
         required
         matInput
         placeholder="Ex: Fulano Ciclano Pereira"/>
@@ -25,9 +18,8 @@
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>CPF</mat-label>
       <input
-        [(ngModel)]="cliente.cpf"
+        formControlName="cpf"
         name="cpf"
-        [formControl]="cpf"
         required
         matInput
         placeholder="Ex: 000.000.000-00"
@@ -39,9 +31,8 @@
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>E-mail</mat-label>
       <input
-        [(ngModel)]="cliente.email"
+        formControlName="email"
         name="email"
-        [formControl]="email"
         required
         matInput
         placeholder="Ex: fulano@gmail.com"/>
@@ -52,9 +43,8 @@
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>Senha</mat-label>
       <input
-        [(ngModel)]="cliente.senha"
+        formControlName="senha"
         name="senha"
-        [formControl]="senha"
         required
         matInput
         placeholder="Ex: 123"
@@ -63,7 +53,7 @@
       <mat-hint></mat-hint>
     </mat-form-field>
 
-    <button (click)="onSubmit()" [disabled]="!validarCampos()" class="full-width mat-elevation-z4" mat-raised-button color="accent">Salvar
+    <button (click)="onSubmit()" [disabled]="!validarCampos()" class="full-width mat-elevation-z4" mat-raised-button color="accent">Atualizar
     </button>
     <button (click)="voltar()" class="full-width mat-elevation-z4" mat-raised-button color="warn">Cancelar</button>
   </form>

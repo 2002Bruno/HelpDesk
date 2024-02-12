@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TecnicoModel } from "../../../models/tecnico";
-import { FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TecnicoService } from "../../../services/tecnico.service";
 import { ToastrService } from "ngx-toastr";
@@ -12,44 +11,59 @@ import { ToastrService } from "ngx-toastr";
 })
 export class TecnicoUpdateComponent implements OnInit {
 
-  tecnico: TecnicoModel = {
-    id: '',
-    nome: '',
-    cpf: '',
-    email: '',
-    senha: '',
-    perfis: [],
-    dataCriacao: '',
-  }
-
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, [Validators.required, Validators.maxLength(11)]);
-  email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  tecnicoForm: FormGroup;
+  tecnicoId: any;
 
   constructor(
     private router: Router,
     private tecnicoService: TecnicoService,
     private toast: ToastrService,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
-    this.tecnico.id = this.route.snapshot.paramMap.get('id');
+    this.tecnicoId = this.route.snapshot.paramMap.get('id');
+    this.inicializarForm();
 
     this.findById();
   }
 
   findById(): void {
-    this.tecnicoService.findById(this.tecnico.id).subscribe(response => {
-      response.perfis = [];
-      this.tecnico = response;
+    this.tecnicoService.findById(this.tecnicoId).subscribe(response => {
+
+      this.preencherForm(response);
     });
   }
 
+  inicializarForm() {
+    this.tecnicoForm = new FormGroup({
+
+      id: new FormControl(this.tecnicoId, Validators.required),
+      nome: new FormControl(null, [Validators.minLength(3), Validators.required]),
+      cpf: new FormControl(null, [Validators.required, Validators.maxLength(11)]),
+      email: new FormControl(null),
+      senha: new FormControl(null, [Validators.minLength(3), Validators.required]),
+    });
+  }
+
+  preencherForm(tecnico) {
+    this.tecnicoForm = this.formBuilder.group({
+      id: [tecnico.id],
+      nome: [tecnico.nome],
+      cpf: [tecnico.cpf],
+      email: [tecnico.email],
+      senha: [tecnico.senha],
+    });
+
+    this.tecnicoForm.controls['email'].disable();
+  }
+
   onSubmit(): void {
-    this.tecnicoService.update(this.tecnico).subscribe(response => {
+    this.tecnicoForm.value.email = this.tecnicoForm['controls']['email'].value;
+
+    this.tecnicoService.update(this.tecnicoForm.value).subscribe(response => {
       this.toast.success('Técnico atualizado com sucesso', 'Edição');
       this.router.navigate(['/tecnicos']);
     }, error => {
@@ -63,18 +77,8 @@ export class TecnicoUpdateComponent implements OnInit {
     });
   }
 
-  addPerfil(perfil: any): void {
-    this.tecnico.perfis.push(perfil);
-
-    if (this.tecnico.perfis.includes(perfil)) {
-      this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-    } else {
-      this.tecnico.perfis.push(perfil);
-    }
-  }
-
   validarCampos() {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.tecnicoForm.valid;
   }
 
   voltar() {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TecnicoService } from "../../../services/tecnico.service";
-import { TecnicoModel } from "../../../models/tecnico";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -12,20 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class TecnicoCreateComponent implements OnInit {
 
-  tecnico: TecnicoModel = {
-    id: '',
-    nome: '',
-    cpf: '',
-    email: '',
-    senha: '',
-    perfis: [],
-    dataCriacao: '',
-  }
-
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, [Validators.required, Validators.maxLength(11)]);
-  email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  tecnicoForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -35,10 +21,20 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inicializaForm();
+  }
+
+  inicializaForm() {
+    this.tecnicoForm = new FormGroup({
+      nome: new FormControl(null, [Validators.minLength(3), Validators.required]),
+      cpf: new FormControl(null, [Validators.required, Validators.maxLength(11)]),
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      senha: new FormControl(null, [Validators.minLength(3), Validators.required]),
+    });
   }
 
   onSubmit(): void {
-    this.tecnicoService.create(this.tecnico).subscribe(response => {
+    this.tecnicoService.create(this.tecnicoForm.value).subscribe(response => {
       this.toast.success('Técnico cadastrado com sucesso', 'Cadastro');
       this.router.navigate(['/tecnicos']);
     }, error => {
@@ -52,18 +48,8 @@ export class TecnicoCreateComponent implements OnInit {
     });
   }
 
-  addPerfil(perfil: any): void {
-    this.tecnico.perfis.push(perfil);
-
-    if (this.tecnico.perfis.includes(perfil)) {
-      this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-    } else {
-      this.tecnico.perfis.push(perfil);
-    }
-  }
-
   validarCampos() {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.tecnicoForm.valid;
   }
 
   voltar() {
