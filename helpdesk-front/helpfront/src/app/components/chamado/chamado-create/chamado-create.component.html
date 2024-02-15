@@ -3,12 +3,11 @@
 
   <img class="full-width" src="assets/img/tecnico-create.svg" alt="Help Desk - Technology">
 
-  <form name="chamadoForm">
+  <form name="chamadoForm" [formGroup]="chamadoForm">
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>Título do chamado</mat-label>
       <input
-        [(ngModel)]="chamado.titulo"
-        [formControl]="titulo"
+        formControlName="titulo"
         type="text"
         name="titulo"
         required
@@ -20,8 +19,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Selecione um Técnico</mat-label>
         <mat-select
-          [(ngModel)]="chamado.tecnico"
-          [formControl]="tecnico"
+          formControlName="tecnico"
           name="tecnico"
           required>
           <mat-option *ngFor="let tecnico of tecnicos" value="{{ tecnico.id }}">{{ tecnico.nome }}</mat-option>
@@ -31,8 +29,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Selecione um Cliente</mat-label>
         <mat-select
-          [(ngModel)]="chamado.cliente"
-          [formControl]="cliente"
+          formControlName="cliente"
           name="tecnico"
           required>
           <mat-option *ngFor="let cliente of clientes" value="{{ cliente.id }}">{{ cliente.nome }}</mat-option>
@@ -44,8 +41,7 @@
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Selecione uma prioridade</mat-label>
         <mat-select
-          [(ngModel)]="chamado.prioridade"
-          [formControl]="prioridade"
+          formControlName="prioridade"
           name="tecnico"
           required>
           <mat-option value="0">BAIXA</mat-option>
@@ -57,8 +53,7 @@
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Selecione o status</mat-label>
         <mat-select
-          [(ngModel)]="chamado.status"
-          [formControl]="status"
+          formControlName="status"
           name="status"
           required>
           <mat-option value="0">ABERT0</mat-option>
@@ -73,8 +68,7 @@
       <textarea
         type="text"
         name="descricao"
-        [(ngModel)]="chamado.observacoes"
-        [formControl]="observacoes"
+        formControlName="observacoes"
         class="observacoes"
         required
         matInput

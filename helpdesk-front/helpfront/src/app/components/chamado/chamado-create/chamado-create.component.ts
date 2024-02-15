@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TecnicoService } from "../../../services/tecnico.service";
 import { TecnicoModel } from "../../../models/tecnico";
 import { ClienteModel } from "../../../models/cliente";
 import { ClienteService } from "../../../services/cliente.service";
-import { ChamadoModel } from "../../../models/chamado";
 import { ChamadoService } from "../../../services/chamado.service";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
@@ -19,16 +18,7 @@ export class ChamadoCreateComponent implements OnInit {
   tecnicos: TecnicoModel[] = [];
   clientes: ClienteModel[] = [];
 
-  chamado: ChamadoModel = {
-    prioridade: '',
-    status: '',
-    titulo: '',
-    observacoes: '',
-    tecnico: null,
-    cliente: null,
-    nomeTecnico: '',
-    nomeCliente: '',
-  };
+  chamadoForm: FormGroup;
 
   titulo: FormControl = new  FormControl(null, Validators.required);
   status: FormControl = new  FormControl(null, Validators.required);
@@ -48,10 +38,23 @@ export class ChamadoCreateComponent implements OnInit {
   ngOnInit(): void {
     this.listaDeTecnicos();
     this.listaDeClientes();
+
+    this.inicializarForm();
+  }
+
+  inicializarForm() {
+    this.chamadoForm = new FormGroup({
+      titulo: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required),
+      prioridade: new FormControl(null, Validators.required),
+      observacoes: new FormControl(null, Validators.required),
+      tecnico: new FormControl(null, Validators.required),
+      cliente: new FormControl(null, Validators.required),
+    });
   }
 
   create(): void {
-    this.chamadoService.create(this.chamado).subscribe(response => {
+    this.chamadoService.create(this.chamadoForm.value).subscribe(response => {
       this.toast.success('Chamado cadastrado com sucesso', 'Success');
       this.router.navigate(['/chamados']);
     }, ex => {
@@ -61,12 +64,7 @@ export class ChamadoCreateComponent implements OnInit {
 
 
   validarCampos() {
-    return this.titulo.valid &&
-      this.tecnico.valid &&
-      this.cliente.valid &&
-      this.prioridade.valid &&
-      this.status.valid &&
-      this.observacoes.valid
+    return this.chamadoForm.valid
   }
 
   listaDeTecnicos() {
