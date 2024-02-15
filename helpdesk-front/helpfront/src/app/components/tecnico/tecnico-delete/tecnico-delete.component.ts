@@ -69,12 +69,8 @@ export class TecnicoDeleteComponent implements OnInit {
       this.toast.success('Técnico deletado com sucesso', 'Exclusão');
       this.router.navigate(['/tecnicos']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
+      if (error?.error) {
+          this.toast.error(error?.error.message);
       }
     });
   }

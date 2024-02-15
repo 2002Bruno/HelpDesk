@@ -38,13 +38,7 @@ export class ClienteCreateComponent implements OnInit {
       this.toast.success('Cliente cadastrado com sucesso', 'Cadastro');
       this.router.navigate(['/clientes']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
-      }
+      this.toast.error('Ocorreu um erro ao tentar fazer o cadastro do cliente, verifique os capos e veja se o cpf é válido!', 'Erro');
     });
   }
 

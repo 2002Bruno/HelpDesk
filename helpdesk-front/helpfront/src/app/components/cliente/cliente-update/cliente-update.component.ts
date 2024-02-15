@@ -67,13 +67,7 @@ export class ClienteUpdateComponent implements OnInit {
       this.toast.success('Cliente atualizado com sucesso', 'Edição');
       this.router.navigate(['/clientes']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
-      }
+      this.toast.error('Ocorreu um erro ao tentar fazer a atualização dos dados do cliente, verifique os capos e veja se o cpf é válido!', 'Erro');
     });
   }
 

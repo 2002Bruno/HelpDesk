@@ -38,13 +38,7 @@ export class TecnicoCreateComponent implements OnInit {
       this.toast.success('Técnico cadastrado com sucesso', 'Cadastro');
       this.router.navigate(['/tecnicos']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
-      }
+      this.toast.error('Ocorreu um erro ao tentar fazer o cadastro do técnico, verifique os capos e veja se o cpf é válido!', 'Erro');
     });
   }
 

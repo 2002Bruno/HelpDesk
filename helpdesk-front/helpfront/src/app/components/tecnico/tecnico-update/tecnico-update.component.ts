@@ -67,13 +67,7 @@ export class TecnicoUpdateComponent implements OnInit {
       this.toast.success('Técnico atualizado com sucesso', 'Edição');
       this.router.navigate(['/tecnicos']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
-      }
+      this.toast.error('Ocorreu um erro ao tentar fazer a atualização dos dados do técnico, verifique os capos e veja se o cpf é válido!', 'Erro');
     });
   }
 

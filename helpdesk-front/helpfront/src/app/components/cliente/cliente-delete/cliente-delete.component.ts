@@ -68,12 +68,8 @@ export class ClienteDeleteComponent implements OnInit {
       this.toast.success('Cliente deletado com sucesso', 'Exclusão');
       this.router.navigate(['/clientes']);
     }, error => {
-      if (error?.error.errors) {
-        error.error.errors.array.forEach(element => {
-          this.toast.error(element.message());
-        })
-      } else {
-        this.toast.error(error.error.message);
+      if (error?.error) {
+        this.toast.error(error?.error.message);
       }
     });
   }
