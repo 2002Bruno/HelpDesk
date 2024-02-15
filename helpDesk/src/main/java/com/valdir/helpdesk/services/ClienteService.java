@@ -75,7 +75,7 @@ public class ClienteService {
         Cliente byId = findById(id);
 
         if (byId.getChamados().size() > 0) {
-            throw new DataIntegrityViolationException("O técnico possui ordens de serviço e não pode ser deletado!");
+            throw new DataIntegrityViolationException("O cliente possui chamados em seu nome e não pode ser deletado do sistema!");
         }
         clienteRepository.deleteById(id);
     }
