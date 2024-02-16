@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TecnicoModel } from "../../../models/tecnico";
 import { ClienteModel } from "../../../models/cliente";
-import { ChamadoModel } from "../../../models/chamado";
-import { FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { TecnicoService } from "../../../services/tecnico.service";
 import { ClienteService } from "../../../services/cliente.service";
 import { ChamadoService } from "../../../services/chamado.service";
@@ -21,23 +20,8 @@ export class ChamadoUpdateComponent implements OnInit {
   tecnicos: TecnicoModel[] = [];
   clientes: ClienteModel[] = [];
 
-  chamado: ChamadoModel = {
-    prioridade: '',
-    status: '',
-    titulo: '',
-    observacoes: '',
-    tecnico: null,
-    cliente: null,
-    nomeTecnico: '',
-    nomeCliente: '',
-  };
-
-  titulo: FormControl = new FormControl(null, Validators.required);
-  status: FormControl = new FormControl(null, Validators.required);
-  prioridade: FormControl = new FormControl(null, Validators.required);
-  observacoes: FormControl = new FormControl(null, Validators.required);
-  tecnico: FormControl = new FormControl(null, Validators.required);
-  cliente: FormControl = new FormControl(null, Validators.required);
+  chamadoForm: FormGroup;
+  chamadoId: any;
 
   constructor(
     private tecnicoService: TecnicoService,
@@ -45,27 +29,53 @@ export class ChamadoUpdateComponent implements OnInit {
     private chamadoService: ChamadoService,
     private toast: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
-    this.chamado.id = this.route.snapshot.paramMap.get('id');
+    this.chamadoId = this.route.snapshot.paramMap.get('id');
+
+    this.inicializarForm();
     this.findChamadoById();
     this.listaDeTecnicos();
     this.listaDeClientes();
   }
 
+  inicializarForm() {
+    this.chamadoForm = new FormGroup({
+      titulo: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required),
+      prioridade: new FormControl(null, Validators.required),
+      observacoes: new FormControl(null, Validators.required),
+      tecnico: new FormControl(null, Validators.required),
+      cliente: new FormControl(null, Validators.required),
+    });
+  }
+
   findChamadoById(): void {
-    this.chamadoService.findById(this.chamado.id).subscribe(response => {
-      this.chamado = response;
+    this.chamadoService.findById(this.chamadoId).subscribe(response => {
+
+      this.preencherForm(response);
     }, ex => {
       this.toast.error(ex.error.error);
     });
   }
 
+  preencherForm(chamado) {
+    this.chamadoForm = this.formBuilder.group({
+      titulo: [chamado.titulo],
+      status: [chamado.status],
+      prioridade: [chamado.prioridade],
+      observacoes: [chamado.observacoes],
+      tecnico: [chamado.tecnico],
+      cliente: [chamado.cliente],
+    });
+  }
+
   update(): void {
-    this.chamadoService.update(this.chamado).subscribe(response => {
+    this.chamadoService.update(this.chamadoForm.value).subscribe(response => {
       this.toast.success('Chamado atualizado com sucesso', 'Success');
       this.router.navigate(['/chamados']);
     }, ex => {
@@ -74,12 +84,7 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   validarCampos() {
-    return this.titulo.valid &&
-      this.tecnico.valid &&
-      this.cliente.valid &&
-      this.prioridade.valid &&
-      this.status.valid &&
-      this.observacoes.valid
+    return this.chamadoForm.valid;
   }
 
   listaDeTecnicos() {

@@ -3,38 +3,32 @@
 
   <img class="full-width" src="assets/img/tecnico-create.svg" alt="Help Desk - Technology">
 
-  <form name="chamadoForm">
+  <form name="chamadoForm" [formGroup]="chamadoForm">
     <mat-form-field class="full-width" appearance="legacy">
       <mat-label>Título do chamado</mat-label>
       <input
-        [(ngModel)]="chamado.titulo"
-        [formControl]="titulo"
+        formControlName="titulo"
         type="text"
         name="titulo"
-        required
         matInput
         placeholder="Ex: Datas de componente estão vindo diferentes"/>
     </mat-form-field>
 
     <div class="status-prioridade">
       <mat-form-field appearance="outline">
-        <mat-label>TECNICO ({{ chamado.nomeTecnico }})</mat-label>
+        <mat-label>TECNICO</mat-label>
         <mat-select
-          [(ngModel)]="chamado.tecnico"
-          [formControl]="tecnico"
-          name="tecnico"
-          required>
+          formControlName="tecnico"
+          name="tecnico" [value]="chamadoForm.value.tecnico">
           <mat-option *ngFor="let tecnico of tecnicos" value="{{ tecnico.id }}">{{ tecnico.nome }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>CLIENTE ({{ chamado.nomeCliente }})</mat-label>
+        <mat-label>CLIENTE</mat-label>
         <mat-select
-          [(ngModel)]="chamado.cliente"
-          [formControl]="cliente"
-          name="tecnico"
-          required>
+          formControlName="cliente"
+          name="tecnico">
           <mat-option *ngFor="let cliente of clientes" value="{{ cliente.id }}">{{ cliente.nome }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -42,12 +36,10 @@
 
     <div class="status-prioridade">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>PRIORIDADE ({{ retornaPrioridade(chamado.prioridade) }})</mat-label>
+        <mat-label>PRIORIDADE</mat-label>
         <mat-select
-          [(ngModel)]="chamado.prioridade"
-          [formControl]="prioridade"
-          name="tecnico"
-          required>
+          formControlName="prioridade"
+          name="tecnico">
           <mat-option value="0">BAIXA</mat-option>
           <mat-option value="1">MÉDIA</mat-option>
           <mat-option value="2">ALTA</mat-option>
@@ -55,12 +47,10 @@
       </mat-form-field>
 
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>STATUS ({{ retornaStatus(chamado.status) }})</mat-label>
+        <mat-label>STATUS</mat-label>
         <mat-select
-          [(ngModel)]="chamado.status"
-          [formControl]="status"
-          name="status"
-          required>
+          formControlName="status"
+          name="status">
           <mat-option value="0">ABERT0</mat-option>
           <mat-option value="1">ANDAMENTO</mat-option>
           <mat-option value="2">ENCERRADO</mat-option>
@@ -73,10 +63,8 @@
       <textarea
         type="text"
         name="descricao"
-        [(ngModel)]="chamado.observacoes"
-        [formControl]="observacoes"
+        formControlName="observacoes"
         class="observacoes"
-        required
         matInput
         placeholder="Ex: Ocorreu um bug no sistema etc..."></textarea>
     </mat-form-field>
