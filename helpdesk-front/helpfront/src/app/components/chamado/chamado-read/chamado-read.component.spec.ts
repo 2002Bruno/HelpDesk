@@ -20,7 +20,7 @@ describe('ChamadoReadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChamadoUpdateComponent, ],
+      declarations: [ChamadoUpdateComponent,],
       imports: [
         RouterTestingModule,
         FormsModule,

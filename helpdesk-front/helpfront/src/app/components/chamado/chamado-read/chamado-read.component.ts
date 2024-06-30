@@ -7,7 +7,7 @@ import { TecnicoService } from "../../../services/tecnico.service";
 import { ClienteService } from "../../../services/cliente.service";
 import { ChamadoService } from "../../../services/chamado.service";
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StatusChamadoEnum } from "../../../enums/status-chamado.enum";
 import { PrioridadeEnum } from "../../../enums/prioridade.enum";
 
@@ -22,8 +22,8 @@ export class ChamadoReadComponent implements OnInit {
   clientes: ClienteModel[] = [];
 
   chamado: ChamadoModel = {
-    prioridade: '',
-    status: '',
+    prioridade: null,
+    status: null,
     titulo: '',
     observacoes: '',
     tecnico: null,
@@ -32,12 +32,12 @@ export class ChamadoReadComponent implements OnInit {
     nomeCliente: '',
   };
 
-  titulo: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
-  status: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
-  prioridade: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
-  observacoes: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
-  tecnico: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
-  cliente: FormControl = new FormControl({value: '', disabled: true}, Validators.required);
+  titulo: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
+  status: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
+  prioridade: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
+  observacoes: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
+  tecnico: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
+  cliente: FormControl = new FormControl({ value: '', disabled: true }, Validators.required);
 
   constructor(
     private tecnicoService: TecnicoService,

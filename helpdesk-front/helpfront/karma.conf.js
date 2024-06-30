@@ -14,6 +14,7 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
+        verboseDeprecations: true,
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
@@ -32,6 +33,10 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
+    captureTimeout: 210000,
+    browserDisconnectTimeout: 10000, // Padrão é 2000 (2 segundos)
+    browserDisconnectTolerance: 3, // Padrão é 0
+    browserNoActivityTimeout: 60000,
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,

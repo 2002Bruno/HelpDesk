@@ -6,7 +6,7 @@ import { TecnicoService } from "../../../services/tecnico.service";
 import { ClienteService } from "../../../services/cliente.service";
 import { ChamadoService } from "../../../services/chamado.service";
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute , Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StatusChamadoEnum } from "../../../enums/status-chamado.enum";
 import { PrioridadeEnum } from "../../../enums/prioridade.enum";
 
@@ -16,6 +16,8 @@ import { PrioridadeEnum } from "../../../enums/prioridade.enum";
   styleUrls: ['./chamado-update.component.scss']
 })
 export class ChamadoUpdateComponent implements OnInit {
+
+  tituloChamado = 'Atualizar Chamado';
 
   tecnicos: TecnicoModel[] = [];
   clientes: ClienteModel[] = [];
@@ -75,7 +77,7 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.chamadoService.update(this.chamadoForm.value).subscribe(response => {
+    this.chamadoService.update(Number(this.chamadoId), this.chamadoForm.value).subscribe(response => {
       this.toast.success('Chamado atualizado com sucesso', 'Success');
       this.router.navigate(['/chamados']);
     }, ex => {

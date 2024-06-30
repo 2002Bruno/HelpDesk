@@ -7,7 +7,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { TecnicoService } from "../../../services/tecnico.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { TecnicoModel } from "../../../models/tecnico";
 
 describe('TecnicoDeleteComponent', () => {
   let component: TecnicoDeleteComponent;
@@ -17,7 +16,7 @@ describe('TecnicoDeleteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TecnicoDeleteComponent ],
+      declarations: [TecnicoDeleteComponent],
       imports: [
         RouterTestingModule,
         FormsModule,
@@ -33,7 +32,7 @@ describe('TecnicoDeleteComponent', () => {
         [CUSTOM_ELEMENTS_SCHEMA]
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -44,9 +43,9 @@ describe('TecnicoDeleteComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
   //
   // it('Teste para Deletar técnico', () => {
   //
