@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [ToastrService]
+  providers: [ToastrService, MatCardModule, MatButtonModule, FormsModule, CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent implements OnInit {
 
@@ -36,6 +39,8 @@ export class LoginComponent implements OnInit {
       this.toast.success('Login realizado com sucesso!', 'Success');
       this.router.navigate(['']);
     }, () => {
+      this.loginForm.get('email').setValue('');
+      this.loginForm.get('senha').setValue('');
       this.toast.error('Usuário e/ou senha inválidos!');
     });
   }

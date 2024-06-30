@@ -2,5 +2,19 @@
 
 @import 'ngx-toastr/toastr';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+    --primary-color: #1B1B1B;
+    --secondary-color: #151515;
+    --third-color: #C0C1C7;
+    --danger-color: #FF0000;
+}

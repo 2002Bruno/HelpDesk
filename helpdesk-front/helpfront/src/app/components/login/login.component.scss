@@ -1,43 +1,78 @@
-.container {
-  height: 100%;
-  background: linear-gradient(100deg, rgba(93,11,131,1) 0%, rgba(73,8,126,1) 41%, rgba(29,56,134,1) 100%);
+.container-fluid {
+  background: var(--primary-color);
+  overflow: auto;
+  /* Ensure the scroll is on the container-fluid */
+}
+
+.card {
+  width: 65% !important;
+  max-height: 100%;
+  color: var(--third-color);
+  background: var(--secondary-color);
+  border: 1px solid var(--third-color);
+}
+
+.input-email {
+  position: relative;
+}
+
+.content-apresent {
+  border-radius: 5% 0% 0% 39%;
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--secondary-color) inset;
+  -webkit-text-fill-color: var(--third-color) !important;
+}
+
+::ng-deep .form-control {
+  background: var(--secondary-color);
+  color: var(--third-color);
+  border: 1px solid var(--third-color);
+}
+
+::ng-deep .form-control:focus {
+  background: var(--secondary-color);
+  color: var(--third-color);
+  border: 1px solid var(--third-color);
+}
+
+.esqueceu-senha {
+  color: var(--third-color);
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.esqueceu-senha:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.invalid-feedback {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  font-size: 0.700rem;
+  color: var(--danger-color);
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
 }
 
-.form {
-  width: 30rem;
-  margin: auto;
-  background: linear-gradient(81deg, rgba(44,29,51,1) 2%, rgba(30,22,37,1) 100%, rgba(4,13,42,1) 100%);
-  padding: 4rem 1rem;
-  border-radius: 1rem;
+.invalid-input {
+  border: 1px solid var(--danger-color) !important;
 }
 
-h1 {
-  width: 100%;
-  text-align: center;
-  color: white;
-}
+@media screen and (max-width: 1024px) {
+  .card {
+    justify-content: center;
+    width: 100% !important;
+    height: auto !important;
+  }
 
-img {
-  height: 15rem;
-  width: 100%;
-  margin: 1.5rem auto 1.5rem auto;
-}
-
-.full-width {
-  width: 100%;
-}
-
-button {
-  margin-top: 1.5rem;
-}
-
-input::placeholder {
-  color: white;
-}
-
-input {
-  color: white;
+  .content-apresent {
+    display: none !important;
+  }
 }
